@@ -7,6 +7,7 @@
 
   @media screen and (min-width: 992px) {
     grid-template-areas: "heading heading" "form table";
+    grid-template-columns: 40% 1fr;
   }
 
   h1 {

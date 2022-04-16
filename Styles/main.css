@@ -18,6 +18,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat; }
 
+button {
+  font-family: inherit; }
+
 html {
   font-size: 62.5%;
   font-family: "Poppins", sans-serif; }
@@ -33,7 +36,8 @@ body {
   padding: 1rem; }
   @media screen and (min-width: 992px) {
     .wrapper {
-      grid-template-areas: "heading heading" "form table"; } }
+      grid-template-areas: "heading heading" "form table";
+      grid-template-columns: 40% 1fr; } }
   .wrapper h1 {
     grid-area: heading;
     text-align: center; }
@@ -60,47 +64,68 @@ body {
     border-radius: 0.5rem;
     background-color: #005564;
     color: #fff;
-    cursor: pointer; }
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out; }
+    .api__form .form__submit:hover {
+      opacity: 0.9; }
 
 .table__wrapper {
-  grid-area: table;
-  width: 100%;
-  border-spacing: 0;
-  text-align: center;
-  font-size: 90%; }
-  .table__wrapper th,
-  .table__wrapper td {
-    padding: 1rem; }
-  .table__wrapper .table__header .table__row {
-    position: relative; }
-    .table__wrapper .table__header .table__row th {
+  grid-area: table; }
+  @media screen and (min-width: 992px) {
+    .table__wrapper {
+      max-height: 25rem;
+      overflow: auto; } }
+  .table__wrapper .table {
+    width: 100%;
+    border-spacing: 0;
+    text-align: center;
+    font-size: 90%; }
+    .table__wrapper .table th,
+    .table__wrapper .table td {
+      padding: 1rem; }
+    .table__wrapper .table .table__header .table__row {
+      position: relative; }
+      .table__wrapper .table .table__header .table__row th {
+        font-weight: 600; }
+      .table__wrapper .table .table__header .table__row th:first-of-type::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        z-index: -1; }
+    .table__wrapper .table .table__body .table__row .row__number {
       font-weight: 600; }
-    .table__wrapper .table__header .table__row th:first-of-type::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 0.5rem;
-      z-index: -1; }
-  .table__wrapper .table__row .row__number {
-    font-weight: 600; }
-  .table__wrapper .table__row .row__btns {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; }
-    .table__wrapper .table__row .row__btns .item__btn {
-      border: 0;
-      border-radius: 0.5rem;
-      padding: 0.5rem 1rem;
-      color: #fff;
-      font-weight: 500; }
-    .table__wrapper .table__row .row__btns .item__edit {
-      background-color: #005564; }
-    .table__wrapper .table__row .row__btns .item__delete {
-      background-color: #64003a; }
+    .table__wrapper .table .table__body .table__row .row__btns {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; }
+      .table__wrapper .table .table__body .table__row .row__btns .item__btn {
+        border: 0;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        font-weight: 500; }
+      .table__wrapper .table .table__body .table__row .row__btns .item__edit {
+        background-color: #005564; }
+      .table__wrapper .table .table__body .table__row .row__btns .item__delete {
+        background-color: #64003a; }
+
+::-webkit-scrollbar {
+  width: 0.5rem; }
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1); }
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25); }
 
 .snackbar__wrapper {
   visibility: hidden;
