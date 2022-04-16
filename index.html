@@ -4,7 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Styles/main.css" />
+
     <title>API Key Manager</title>
   </head>
-  <body></body>
+  <body>
+    <main class="wrapper">
+      <h1 class="title">API Key Manager</h1>
+
+      <form action="" id="api-form" class="api__form">
+        <div class="form__field">
+          <label for="username" class="field__label">User Name</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="field__input"
+          />
+        </div>
+        <div class="form__field">
+          <label for="api-key" class="field__label">API Key</label>
+          <input type="text" name="apiKey" id="api-key" class="field__input" />
+        </div>
+        <div class="form__field">
+          <label for="api-secret" class="field__label">API Secret</label>
+          <input
+            type="text"
+            name="apiSecret"
+            id="api-secret"
+            class="field__input"
+          />
+        </div>
+        <button
+          type="submit"
+          id="form-submit-btn"
+          class="form__btn form__submit"
+        >
+          Submit
+        </button>
+      </form>
+
+      <section id="table-wrapper" class="table__wrapper">
+        <table class="table__wrapper">
+          <thead class="table__header">
+            <tr class="table__row">
+              <th class="row__number">#</th>
+              <th class="row__username">User Name</th>
+              <th class="row__key">API Key</th>
+              <th class="row__secret">API Secret</th>
+              <th class="row__btns"></th>
+            </tr>
+          </thead>
+          <tbody id="api-table" class="table__body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <div id="snackbar" class="snackbar__wrapper"></div>
+
+    <script src="./Javascript/index.js"></script>
+  </body>
 </html>
