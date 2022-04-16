@@ -1,0 +1,16 @@
+.wrapper {
+  width: min(100%, 150rem);
+  display: grid;
+  grid-template-areas: "heading" "form" "table";
+  gap: 5rem;
+  padding: 1rem;
+
+  @media screen and (min-width: 992px) {
+    grid-template-areas: "heading heading" "form table";
+  }
+
+  h1 {
+    grid-area: heading;
+    text-align: center;
+  }
+}

@@ -1,0 +1,30 @@
+.api__form {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .field__input {
+      border: 0;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .form__submit {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: rgb(0, 85, 100);
+    color: #fff;
+    cursor: pointer;
+  }
+}

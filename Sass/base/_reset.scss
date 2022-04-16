@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(141deg, #fff 0%, #f7f7f7 51%, #fff 75%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
