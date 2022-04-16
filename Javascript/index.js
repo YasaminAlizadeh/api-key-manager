@@ -32,7 +32,7 @@ apiForm.addEventListener("submit", (e) => {
     }
     apiForm.reset();
 
-    addListItems();
+    displayListItems();
   } else {
     displaySnackbar("Oops... Please fill the form properly");
     console.log("Oops... Please fill the form properly");
@@ -117,7 +117,7 @@ const generateListItem = (index, data) => {
   apiList.appendChild(newItem);
 };
 
-const addListItems = () => {
+const displayListItems = () => {
   apiList.innerHTML = "";
 
   apiInfo.map((element, index) => {
@@ -153,7 +153,7 @@ const editListItem = (id) => {
 const deleteListItem = (id) => {
   apiInfo = apiInfo.filter((element) => element.id !== id);
 
-  addListItems();
+  displayListItems();
   apiForm.reset();
 
   selectedId = null;
