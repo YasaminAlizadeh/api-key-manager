@@ -95,9 +95,7 @@ const generateListItem = (index, data) => {
         <td class="row__number">${index}</td>
         <td class="row__username">${username}</td>
         <td class="row__key">${apiKey}</td>
-        <td class="row__secret">${
-          apiSecret.slice(0, 4) + "*".repeat(10) + apiSecret.slice(-2)
-        }</td>
+        <td class="row__secret">${displayApiSecret(apiSecret)}</td>
         <td class="row__btns">
             <button class="item__btn item__edit">Edit</button>
             <button class="item__btn item__delete">Delete</button>
@@ -170,4 +168,21 @@ const displaySnackbar = (msg) => {
   setTimeout(() => {
     snackbar.classList.remove("show");
   }, 3000);
+};
+
+const displayApiSecret = (str) => {
+  let newSecret = "";
+
+  if (str.length >= 10) {
+    newSecret =
+      str.slice(0, 4) +
+      "*".repeat(str.length - 6 <= 10 ? str.length - 6 : 10) +
+      str.slice(-2);
+  } else if (str.length >= 4) {
+    newSecret = str.slice(0, 2) + "*".repeat(str.length - 4) + str.slice(-2);
+  } else {
+    newSecret = str.slice(0, 1) + "*".repeat(str.length - 1);
+  }
+
+  return newSecret;
 };
