@@ -90,8 +90,7 @@ body {
       top: 0; }
     .table__wrapper .table th,
     .table__wrapper .table td {
-      padding: 1rem;
-      border: 1px solid red; }
+      padding: 1rem; }
     .table__wrapper .table .table__header .table__row {
       position: relative; }
       .table__wrapper .table .table__header .table__row th {
