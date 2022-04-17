@@ -92,10 +92,39 @@ const generateListItem = (index, data) => {
   newItem.className = "table__row";
 
   const itemData = `
-        <td class="row__number">${index}</td>
-        <td class="row__username">${username}</td>
-        <td class="row__key">${apiKey}</td>
-        <td class="row__secret">${displayApiSecret(apiSecret)}</td>
+        <td class="row__number">
+          ${index}
+        </td>
+        <td class="row__username">
+          <div class="row__item">
+            <p class="td__text">
+              ${username}
+            </p>
+            <span class="clipboard__icon">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </span>
+          </div>
+        </td>
+        <td class="row__key">
+          <div class="row__item">
+            <p class="td__text">
+              ${apiKey}
+            </p>
+            <span class="clipboard__icon">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </span>
+          </div>
+        </td>
+        <td class="row__secret">
+          <div class="row__item">
+            <p class="td__text">
+              ${displayApiSecret(apiSecret)}
+            </p>
+            <span class="clipboard__icon">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </span>        
+          </div>
+        </td>
         <td class="row__btns">
             <button class="item__btn item__edit">Edit</button>
             <button class="item__btn item__delete">Delete</button>
@@ -110,6 +139,12 @@ const generateListItem = (index, data) => {
 
   newItem.querySelector(".item__delete").addEventListener("click", () => {
     deleteListItem(id);
+  });
+
+  [...newItem.querySelectorAll("td")].forEach((td) => {
+    td.addEventListener("click", () => {
+      copyToClipBoard(td, id);
+    });
   });
 
   apiList.appendChild(newItem);
@@ -139,7 +174,7 @@ const editListItem = (id) => {
   const { username, apiKey, apiSecret } = findListItem(id);
 
   formState = "edit";
-  itemSubmitBtn.innerText = "Edit";
+  itemSubmitBtn.innerText = "Update";
 
   usernameInput.value = username;
   apiKeyInput.value = apiKey;
@@ -185,4 +220,28 @@ const displayApiSecret = (str) => {
   }
 
   return newSecret;
+};
+
+const copyToClipBoard = (txtContainer, id) => {
+  const selectedItem = findListItem(id);
+  let copyValue = null;
+
+  switch (txtContainer.className) {
+    case "row__username":
+      copyValue = selectedItem.username;
+      break;
+
+    case "row__key":
+      copyValue = selectedItem.apiKey;
+      break;
+
+    case "row__secret":
+      copyValue = selectedItem.apiSecret;
+      break;
+
+    default:
+      break;
+  }
+  navigator.clipboard.writeText(copyValue);
+  displaySnackbar("Copied to Clipboard");
 };
