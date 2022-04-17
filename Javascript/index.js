@@ -95,7 +95,7 @@ const generateListItem = (index, data) => {
         <td class="row__number">
           ${index}
         </td>
-        <td class="row__username">
+        <td class="row__info row__username">
           <div class="row__item">
             <p class="td__text">
               ${username}
@@ -105,7 +105,7 @@ const generateListItem = (index, data) => {
             </span>
           </div>
         </td>
-        <td class="row__key">
+        <td class="row__info row__key">
           <div class="row__item">
             <p class="td__text">
               ${apiKey}
@@ -115,7 +115,7 @@ const generateListItem = (index, data) => {
             </span>
           </div>
         </td>
-        <td class="row__secret">
+        <td class="row__info row__secret">
           <div class="row__item">
             <p class="td__text">
               ${displayApiSecret(apiSecret)}
@@ -141,7 +141,7 @@ const generateListItem = (index, data) => {
     deleteListItem(id);
   });
 
-  [...newItem.querySelectorAll("td")].forEach((td) => {
+  [...newItem.querySelectorAll(".row__info")].forEach((td) => {
     td.addEventListener("click", () => {
       copyToClipBoard(td, id);
     });
