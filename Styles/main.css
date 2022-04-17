@@ -122,9 +122,12 @@ body {
       align-items: center;
       justify-content: center; }
       .table__wrapper .table .table__body .table__row .row__item .clipboard__icon {
-        display: none; }
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out; }
       .table__wrapper .table .table__body .table__row .row__item:hover .clipboard__icon {
-        display: inline-block; }
+        opacity: 1;
+        visibility: visible; }
     .table__wrapper .table .table__body .table__row .row__btns {
       display: flex;
       align-items: center;
