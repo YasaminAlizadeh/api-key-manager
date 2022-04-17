@@ -24,6 +24,10 @@
     th,
     td {
       padding: 1rem;
+
+      &:first-of-type {
+        width: 5%;
+      }
     }
 
     .table__header {
