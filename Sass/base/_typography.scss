@@ -8,3 +8,7 @@ html {
 body {
   font-size: clamp(1rem, 7.5vw, 1.5rem);
 }
+
+button {
+  font-size: inherit;
+}
