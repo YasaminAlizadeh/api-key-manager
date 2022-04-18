@@ -93,7 +93,7 @@ body {
       padding: 1rem; }
       .table__wrapper .table th:first-of-type,
       .table__wrapper .table td:first-of-type {
-        width: 5%; }
+        width: min(5vw, 5rem); }
     .table__wrapper .table .table__header .table__row {
       position: relative; }
       .table__wrapper .table .table__header .table__row th {
