@@ -21,12 +21,33 @@ body {
 button {
   font-family: inherit; }
 
+::-webkit-scrollbar {
+  background-color: transparent; }
+
+::-webkit-scrollbar:horizontal {
+  height: 0.5rem; }
+
+::-webkit-scrollbar:vertical {
+  height: 0.5rem; }
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1); }
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25); }
+
 html {
   font-size: 62.5%;
   font-family: "Poppins", sans-serif; }
 
 body {
   font-size: clamp(1rem, 7.5vw, 1.5rem); }
+
+button {
+  font-size: inherit; }
 
 .wrapper {
   width: min(100%, 150rem);
@@ -72,15 +93,15 @@ body {
 
 .table__wrapper {
   grid-area: table;
-  padding: 1rem;
+  padding: min(5vw, 1rem);
   background-color: rgba(0, 0, 0, 0.025);
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem;
+  overflow: auto; }
   @media screen and (min-width: 992px) {
     .table__wrapper {
-      max-height: 27.5rem;
-      overflow: auto; } }
+      max-height: 27.5rem; } }
   .table__wrapper .table {
-    width: 100%;
+    width: max(100%, 50rem);
     border-spacing: 0;
     text-align: center;
     font-size: 90%;
@@ -94,6 +115,9 @@ body {
       .table__wrapper .table th:first-of-type,
       .table__wrapper .table td:first-of-type {
         width: min(5vw, 5rem); }
+      .table__wrapper .table th:last-of-type,
+      .table__wrapper .table td:last-of-type {
+        width: 25%; }
     .table__wrapper .table .table__header .table__row {
       position: relative; }
       .table__wrapper .table .table__header .table__row th {
@@ -111,53 +135,43 @@ body {
           border-radius: 0.5rem 0 0 0.5rem; }
         .table__wrapper .table .table__header .table__row th:last-of-type::before {
           border-radius: 0 0.5rem 0.5rem 0; }
-    .table__wrapper .table .table__body .table__row .row__number {
-      font-weight: 600; }
-    .table__wrapper .table .table__body .table__row .td__text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; }
-    .table__wrapper .table .table__body .table__row .row__item {
-      display: flex;
-      align-items: center;
-      justify-content: center; }
-      .table__wrapper .table .table__body .table__row .row__item .clipboard__icon {
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease-in-out; }
-      .table__wrapper .table .table__body .table__row .row__item:hover .clipboard__icon {
-        opacity: 1;
-        visibility: visible; }
-    .table__wrapper .table .table__body .table__row .row__btns {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem; }
-      .table__wrapper .table .table__body .table__row .row__btns .item__btn {
-        border: 0;
-        border-radius: 0.5rem;
-        padding: 0.5rem 1rem;
-        color: #fff;
-        font-weight: 500;
-        cursor: pointer;
-        transition: opacity 0.3s ease-in-out; }
-        .table__wrapper .table .table__body .table__row .row__btns .item__btn:hover {
-          opacity: 0.9; }
-      .table__wrapper .table .table__body .table__row .row__btns .item__edit {
-        background-color: #005564; }
-      .table__wrapper .table .table__body .table__row .row__btns .item__delete {
-        background-color: #64003a; }
-
-::-webkit-scrollbar {
-  width: 0.5rem; }
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; }
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1); }
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25); }
+    .table__wrapper .table .table__body {
+      padding: min(5vw, 1rem); }
+      .table__wrapper .table .table__body .table__row .row__number {
+        font-weight: 600; }
+      .table__wrapper .table .table__body .table__row .td__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      .table__wrapper .table .table__body .table__row .row__item {
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .table__wrapper .table .table__body .table__row .row__item .clipboard__icon {
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease-in-out; }
+        .table__wrapper .table .table__body .table__row .row__item:hover .clipboard__icon {
+          opacity: 1;
+          visibility: visible; }
+      .table__wrapper .table .table__body .table__row .row__btns {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; }
+        .table__wrapper .table .table__body .table__row .row__btns .item__btn {
+          border: 0;
+          border-radius: 0.5rem;
+          padding: 0.5rem 1rem;
+          color: #fff;
+          font-weight: 500;
+          cursor: pointer;
+          transition: opacity 0.3s ease-in-out; }
+          .table__wrapper .table .table__body .table__row .row__btns .item__btn:hover {
+            opacity: 0.9; }
+        .table__wrapper .table .table__body .table__row .row__btns .item__edit {
+          background-color: #005564; }
+        .table__wrapper .table .table__body .table__row .row__btns .item__delete {
+          background-color: #64003a; }
 
 .snackbar__wrapper {
   visibility: hidden;
@@ -214,6 +228,7 @@ body {
     width: min(90%, 50rem);
     border-radius: 0.5rem;
     background-color: #fff;
+    word-wrap: break-word;
     transition: all 0.3s ease-in-out; }
     .popup__wrapper .popup__content .popup__btns {
       display: flex;
