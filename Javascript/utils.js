@@ -1,12 +1,15 @@
 const searchInput = document.querySelector("#search-input");
 
 // ------------------- on input change, fire the searchItems function (both these addEventListeners do the same thing)
+// ------------------- but first... when user starts to search something, disable sort and get the displayed list back to normal (none)
 
 searchInput.addEventListener("input", (e) => {
+  sortItems("none");
   searchItems(e.target.value);
 });
 
 searchInput.addEventListener("propertychange", (e) => {
+  sortItems("none");
   searchItems(e.target.value);
 });
 
