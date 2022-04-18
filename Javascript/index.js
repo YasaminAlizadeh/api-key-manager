@@ -11,6 +11,8 @@ let apiInfo = [];
 let formState = "add";
 let selectedId = null;
 
+// ------------------- on submit, check formState and fire the proper function to change our list. then display items from the list.
+
 apiForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -38,6 +40,8 @@ apiForm.addEventListener("submit", (e) => {
   }
 });
 
+// ------------------- on submit (if formState === "Add"), add the new input values to the list
+
 const handleSubmit = (itemData) => {
   if (!duplicateCheck(itemData)) {
     apiInfo.push({
@@ -48,6 +52,8 @@ const handleSubmit = (itemData) => {
     displaySnackbar("Such item already exists...");
   }
 };
+
+// ------------------- on submit (if formState === "Edit"), add the new input values instead of the previous data to the list
 
 const handleEdit = (itemData) => {
   const { username, apiKey, apiSecret } = itemData;
@@ -65,6 +71,8 @@ const handleEdit = (itemData) => {
   itemSubmitBtn.innerText = "Submit";
 };
 
+// ------------------- check if the given data already exist in our list
+
 const duplicateCheck = (newApiObject) => {
   const { username, apiKey, apiSecret } = newApiObject;
 
@@ -81,6 +89,8 @@ const duplicateCheck = (newApiObject) => {
     return false;
   }
 };
+
+// ------------------- get the data of an item and display them as a row in table
 
 const generateListItem = (index, data) => {
   const { id, username, apiKey, apiSecret } = data;
@@ -149,6 +159,8 @@ const generateListItem = (index, data) => {
   apiList.appendChild(newItem);
 };
 
+// ------------------- iterate through given list and show the items inside of it
+
 const displayListItems = (data) => {
   apiList.innerHTML = "";
 
@@ -156,6 +168,8 @@ const displayListItems = (data) => {
     generateListItem(index, element);
   });
 };
+
+// ------------------- find the desired item using its id and return its data
 
 const findListItem = (id) => {
   const selectedItemIndex = apiInfo.findIndex((element) => element.id === id);
@@ -168,6 +182,8 @@ const findListItem = (id) => {
     apiSecret: selectedItem.apiSecret,
   };
 };
+
+// ------------------- get the selected item based on its Id and display its data in form inputs
 
 const editListItem = (id) => {
   const { username, apiKey, apiSecret } = findListItem(id);
@@ -182,6 +198,8 @@ const editListItem = (id) => {
   selectedId = id;
 };
 
+// ------------------- delete selected item based on its id
+
 const deleteListItem = (id) => {
   apiInfo = apiInfo.filter((element) => element.id !== id);
 
@@ -193,57 +211,7 @@ const deleteListItem = (id) => {
   itemSubmitBtn.innerText = "Submit";
 };
 
-const displaySnackbar = (msg) => {
-  var snackbar = document.getElementById("snackbar");
-  snackbar.innerText = msg;
-
-  snackbar.classList.add("show");
-
-  setTimeout(() => {
-    snackbar.classList.remove("show");
-  }, 3000);
-};
-
-const displayApiSecret = (str) => {
-  let newSecret = "";
-
-  if (str.length >= 10) {
-    newSecret =
-      str.slice(0, 4) +
-      "*".repeat(str.length - 6 <= 10 ? str.length - 6 : 10) +
-      str.slice(-2);
-  } else if (str.length >= 4) {
-    newSecret = str.slice(0, 2) + "*".repeat(str.length - 4) + str.slice(-2);
-  } else {
-    newSecret = str.slice(0, 1) + "*".repeat(str.length - 1);
-  }
-
-  return newSecret;
-};
-
-const copyToClipBoard = (txtContainer, id) => {
-  const selectedItem = findListItem(id);
-  let copyValue = null;
-
-  switch (txtContainer.className) {
-    case "row__username":
-      copyValue = selectedItem.username;
-      break;
-
-    case "row__key":
-      copyValue = selectedItem.apiKey;
-      break;
-
-    case "row__secret":
-      copyValue = selectedItem.apiSecret;
-      break;
-
-    default:
-      break;
-  }
-  navigator.clipboard.writeText(copyValue);
-  displaySnackbar("Copied to Clipboard");
-};
+// ------------------- show Popup to confirm delete action before actually deleting item from list
 
 const popup = document.querySelector("#popup");
 
@@ -268,3 +236,22 @@ popupDeleteBtn.addEventListener("click", () => {
   closePopup();
   selectedId = null;
 });
+
+// ------------------- display Api Secret correctly according to its length
+
+const displayApiSecret = (str) => {
+  let newSecret = "";
+
+  if (str.length >= 10) {
+    newSecret =
+      str.slice(0, 4) +
+      "*".repeat(str.length - 6 <= 10 ? str.length - 6 : 10) +
+      str.slice(-2);
+  } else if (str.length >= 4) {
+    newSecret = str.slice(0, 2) + "*".repeat(str.length - 4) + str.slice(-2);
+  } else {
+    newSecret = str.slice(0, 1) + "*".repeat(str.length - 1);
+  }
+
+  return newSecret;
+};
