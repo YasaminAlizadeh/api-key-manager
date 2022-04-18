@@ -202,7 +202,8 @@ button {
   .utils__wrapper .sort__wrapper {
     display: flex;
     align-items: center;
-    gap: 1rem; }
+    gap: 1rem;
+    cursor: pointer; }
     .utils__wrapper .sort__wrapper .sort__term {
       font-weight: 600; }
 
