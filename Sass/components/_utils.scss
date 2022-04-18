@@ -1,0 +1,37 @@
+.utils__wrapper {
+  grid-area: utils;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: 2rem;
+
+  @media screen and (min-width: 576px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .search__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: min-content;
+
+    .search__input {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: transparent;
+      border: 0;
+      box-shadow: 0 0.2rem 0 -0.1rem #000;
+    }
+  }
+
+  .sort__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .sort__term {
+      font-weight: 600;
+    }
+  }
+}

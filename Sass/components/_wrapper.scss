@@ -1,12 +1,13 @@
 .wrapper {
   width: min(100%, 150rem);
   display: grid;
-  grid-template-areas: "heading" "form" "table";
-  gap: 5rem;
+  grid-template-areas: "heading" "form" "utils" "table";
+  gap: 3rem 5rem;
+  grid-template-rows: auto auto 1fr;
   padding: 1rem;
 
   @media screen and (min-width: 992px) {
-    grid-template-areas: "heading heading" "form table";
+    grid-template-areas: "heading heading" ". utils" "form table";
     grid-template-columns: 40% 1fr;
   }
 

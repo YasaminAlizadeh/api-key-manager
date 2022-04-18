@@ -33,7 +33,7 @@
 
       <form action="" id="api-form" class="api__form">
         <div class="form__field">
-          <label for="username" class="field__label">User Name</label>
+          <label for="username" class="field__label">Username</label>
           <input
             type="text"
             name="username"
@@ -63,12 +63,30 @@
         </button>
       </form>
 
+      <form action="" id="utils" class="utils__wrapper">
+        <div id="sort" class="sort__wrapper">
+          <ion-icon name="funnel-outline"></ion-icon>
+          Sort By: <span id="sort-term" class="sort__term">None</span>
+        </div>
+
+        <div class="search__wrapper">
+          <input
+            type="text"
+            name="search"
+            id="search-input"
+            class="search__input"
+            placeholder="Search Key ..."
+          />
+          <ion-icon name="search-outline"></ion-icon>
+        </div>
+      </form>
+
       <section id="table-wrapper" class="table__wrapper">
         <table class="table">
           <thead class="table__header">
             <tr class="table__row">
               <th class="row__number">#</th>
-              <th class="row__username">User Name</th>
+              <th class="row__username">Username</th>
               <th class="row__key">API Key</th>
               <th class="row__secret">API Secret</th>
               <th class="row__btns"></th>
@@ -91,6 +109,7 @@
     </div>
 
     <script src="./Javascript/index.js"></script>
+    <script src="./Javascript/utils.js"></script>
 
     <script
       type="module"
