@@ -20,9 +20,9 @@
     padding: 4rem min(5vw, 1rem);
     text-align: center;
     width: min(90%, 50rem);
-
     border-radius: 0.5rem;
     background-color: #fff;
+    word-wrap: break-word;
     transition: all 0.3s ease-in-out;
 
     .popup__btns {

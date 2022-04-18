@@ -138,7 +138,7 @@ const generateListItem = (index, data) => {
   });
 
   newItem.querySelector(".item__delete").addEventListener("click", () => {
-    displayDeletePopup();
+    displayPopup(`Are you sure you want to delete "${apiKey}"?`);
     selectedId = id;
   });
 
@@ -249,19 +249,24 @@ const copyToClipBoard = (txtContainer, id) => {
 
 const popup = document.querySelector("#popup");
 
-const displayDeletePopup = () => {
+const displayPopup = (msg) => {
+  popup.querySelector(".popup__text").innerText = msg;
   popup.classList.add("popup__Wrapper--show");
+};
+
+const closePopup = () => {
+  popup.classList.remove("popup__Wrapper--show");
 };
 
 const popupCancelBtn = popup.querySelector(".popup__btn--cancel");
 const popupDeleteBtn = popup.querySelector(".popup__btn--delete");
 
 popupCancelBtn.addEventListener("click", () => {
-  popup.classList.remove("popup__Wrapper--show");
+  closePopup();
 });
 
 popupDeleteBtn.addEventListener("click", () => {
   deleteListItem(selectedId);
-  popup.classList.remove("popup__Wrapper--show");
+  closePopup();
   selectedId = null;
 });
