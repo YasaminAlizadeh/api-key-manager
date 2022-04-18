@@ -32,10 +32,9 @@ apiForm.addEventListener("submit", (e) => {
     }
     apiForm.reset();
 
-    displayListItems();
+    displayListItems(apiInfo);
   } else {
     displaySnackbar("Oops... Please fill the form properly");
-    console.log("Oops... Please fill the form properly");
   }
 });
 
@@ -47,7 +46,6 @@ const handleSubmit = (itemData) => {
     });
   } else {
     displaySnackbar("Such item already exists...");
-    console.log("Such item already exists...");
   }
 };
 
@@ -151,10 +149,10 @@ const generateListItem = (index, data) => {
   apiList.appendChild(newItem);
 };
 
-const displayListItems = () => {
+const displayListItems = (data) => {
   apiList.innerHTML = "";
 
-  apiInfo.map((element, index) => {
+  data.map((element, index) => {
     generateListItem(index, element);
   });
 };
@@ -187,7 +185,7 @@ const editListItem = (id) => {
 const deleteListItem = (id) => {
   apiInfo = apiInfo.filter((element) => element.id !== id);
 
-  displayListItems();
+  displayListItems(apiInfo);
   apiForm.reset();
 
   selectedId = null;
