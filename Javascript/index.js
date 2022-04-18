@@ -138,7 +138,8 @@ const generateListItem = (index, data) => {
   });
 
   newItem.querySelector(".item__delete").addEventListener("click", () => {
-    deleteListItem(id);
+    displayDeletePopup();
+    selectedId = id;
   });
 
   [...newItem.querySelectorAll(".row__info")].forEach((td) => {
@@ -245,3 +246,22 @@ const copyToClipBoard = (txtContainer, id) => {
   navigator.clipboard.writeText(copyValue);
   displaySnackbar("Copied to Clipboard");
 };
+
+const popup = document.querySelector("#popup");
+
+const displayDeletePopup = () => {
+  popup.classList.add("popup__Wrapper--show");
+};
+
+const popupCancelBtn = popup.querySelector(".popup__btn--cancel");
+const popupDeleteBtn = popup.querySelector(".popup__btn--delete");
+
+popupCancelBtn.addEventListener("click", () => {
+  popup.classList.remove("popup__Wrapper--show");
+});
+
+popupDeleteBtn.addEventListener("click", () => {
+  deleteListItem(selectedId);
+  popup.classList.remove("popup__Wrapper--show");
+  selectedId = null;
+});
