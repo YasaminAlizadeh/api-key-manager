@@ -31,7 +31,7 @@ input {
   height: 0.5rem; }
 
 ::-webkit-scrollbar:vertical {
-  height: 0.5rem; }
+  width: 0.5rem; }
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1; }
