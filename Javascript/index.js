@@ -103,7 +103,7 @@ const generateListItem = (index, data) => {
         <td class="row__number">
           ${index}
         </td>
-        <td class="row__info row__username">
+        <td class="row__info row__username" data-type="username">
           <div class="row__item">
             <p class="td__text">
               ${username}
@@ -113,7 +113,7 @@ const generateListItem = (index, data) => {
             </span>
           </div>
         </td>
-        <td class="row__info row__key">
+        <td class="row__info row__key" data-type="key">
           <div class="row__item">
             <p class="td__text">
               ${apiKey}
@@ -123,7 +123,7 @@ const generateListItem = (index, data) => {
             </span>
           </div>
         </td>
-        <td class="row__info row__secret">
+        <td class="row__info row__secret" data-type="secret">
           <div class="row__item">
             <p class="td__text">
               ${displayApiSecret(apiSecret)}
