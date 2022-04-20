@@ -19,8 +19,6 @@ const copyToClipBoard = (txtContainer, id) => {
       break;
   }
 
-  console.log(txtContainer.dataset);
-
   navigator.clipboard.writeText(copyValue);
   displaySnackbar("Copied to Clipboard");
 };
