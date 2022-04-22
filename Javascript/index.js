@@ -7,16 +7,39 @@ const itemEditBtn = document.querySelector("#form-edit-btn");
 
 const apiList = document.querySelector("#api-table");
 
+const apiUrl = "/api/v1";
+
 let apiInfo = [];
 let formState = "add";
 let selectedId = null;
+
+// ------------------- Get all data from backend after load
+
+fetch(apiUrl + "/info", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    apiInfo = [...data.info];
+    displayListItems(apiInfo);
+  })
+  .catch((error) => {
+    console.log(`Error: ${error}`);
+  });
 
 // ------------------- on submit, check formState and fire the proper function to change our list. then display items from the list.
 
 apiForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (usernameInput.value && apiKeyInput.value && apiSecretInput.value) {
+  const _username = usernameInput.value;
+  const _apiKey = apiKeyInput.value;
+  const _apiSecret = apiSecretInput.value;
+
+  if (_username && _apiKey && _apiSecret) {
     const formData = new FormData(e.target);
     const formProps = Object.fromEntries(formData);
 
@@ -33,8 +56,6 @@ apiForm.addEventListener("submit", (e) => {
         break;
     }
     apiForm.reset();
-
-    displayListItems(apiInfo);
   } else {
     displaySnackbar("Oops... Please fill the form properly");
   }
@@ -44,31 +65,70 @@ apiForm.addEventListener("submit", (e) => {
 
 const handleSubmit = (itemData) => {
   if (!duplicateCheck(itemData)) {
-    apiInfo.push({
-      id: `${apiInfo.length + 1}_${new Date().getTime()}`,
+    const data = JSON.stringify({
       ...itemData,
     });
+
+    fetch(apiUrl + "/info", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok) {
+          apiInfo.push(itemData);
+          displayListItems(apiInfo);
+        }
+      })
+      .catch((error) => {
+        console.log(`Error: ${error}`);
+      });
   } else {
     displaySnackbar("Such item already exists...");
   }
 };
-
 // ------------------- on submit (if formState === "Edit"), add the new input values instead of the previous data to the list
 
 const handleEdit = (itemData) => {
-  const { username, apiKey, apiSecret } = itemData;
   const { index } = findListItem(selectedId);
+  const { username, apiKey, apiSecret } = itemData;
 
-  apiInfo.splice(index, 1, {
-    id: selectedId,
-    username: username,
-    apiKey: apiKey,
-    apiSecret: apiSecret,
+  const data = JSON.stringify({
+    ...itemData,
   });
 
-  selectedId = null;
-  formState = "add";
-  itemSubmitBtn.innerText = "Submit";
+  fetch(apiUrl + `/info/${selectedId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.ok) {
+        apiInfo.splice(index, 1, {
+          id: selectedId,
+          username: username,
+          apiKey: apiKey,
+          apiSecret: apiSecret,
+        });
+
+        displayListItems(apiInfo);
+
+        selectedId = null;
+        formState = "add";
+        itemSubmitBtn.innerText = "Submit";
+      } else {
+        displaySnackbar(`Error: ${data.message}`);
+      }
+    })
+    .catch((error) => {
+      console.log(`Error: ${error}`);
+    });
 };
 
 // ------------------- check if the given data already exist in our list
@@ -174,7 +234,6 @@ const displayListItems = (data) => {
 const findListItem = (id) => {
   const selectedItemIndex = apiInfo.findIndex((element) => element.id === id);
   const selectedItem = apiInfo[selectedItemIndex];
-
   return {
     index: selectedItemIndex,
     username: selectedItem.username,
@@ -201,14 +260,30 @@ const editListItem = (id) => {
 // ------------------- delete selected item based on its id
 
 const deleteListItem = (id) => {
-  apiInfo = apiInfo.filter((element) => element.id !== id);
+  fetch(apiUrl + `/info/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.ok) {
+        apiInfo = apiInfo.filter((item) => item.id !== id);
+        displayListItems(apiInfo);
 
-  displayListItems(apiInfo);
-  apiForm.reset();
+        apiForm.reset();
 
-  selectedId = null;
-  formState = "add";
-  itemSubmitBtn.innerText = "Submit";
+        selectedId = null;
+        formState = "add";
+        itemSubmitBtn.innerText = "Submit";
+      } else {
+        displaySnackbar(`Error: ${data.message} `);
+      }
+    })
+    .catch((error) => {
+      displaySnackbar(`Error: ${error}`);
+    });
 };
 
 // ------------------- show Popup to confirm delete action before actually deleting item from list
